@@ -1,6 +1,6 @@
 class get_audio{
     constructor(interval_length, full_data = false){
-        console.log("initializing get_audio object")
+        console.log("initializing get_audio object");
 
         this.int_length = interval_length; //how frequently do we refresh data
         this.full_data = full_data;        //do we send back all frames or just an average?
@@ -30,21 +30,21 @@ class get_audio{
     }
 
     startRecording(){
-        var frame_number = 1
+        var frame_number = 1;
 
         this.record_interval = setInterval( () => {
             var array = new Uint8Array(this.analyser.frequencyBinCount);
             this.analyser.getByteFrequencyData(array);
             this.recording_data.push(
                 {frame: frame_number, frequency: array}
-            )
+            );
             frame_number++;
             console.log(array);
         }, this.int_length);
     }
 
     stopRecording(){
-        console.log("stopping recording")
+        console.log("stopping recording");
         clearInterval(this.record_interval ); //kill recording loop
 
         var returned_data = []; //holder for our data return
@@ -52,11 +52,11 @@ class get_audio{
         //only send back the frames in which there was sound.
         this.recording_data.forEach(rec => {
             //add all frequencies to check if anything was recorded
-            var freq_total = rec.frequency.reduce((total,f) => total + f)
+            var freq_total = rec.frequency.reduce((total,f) => total + f);
 
             //if something was recorded, push it to the results.
-            if(freq_total != 0) { returned_data.push(rec) }
-        })
+            if(freq_total !== 0) { returned_data.push(rec) }
+        });
 
         this.recording_data = []; //reset the data holder
 
@@ -70,9 +70,9 @@ class get_audio{
             var freq_vals = frame.frequency;
 
             freq_vals.forEach((f,i) => {
-                totals[i] += f //add results.
-            })
-        })
+                totals[i] += f; //add results.
+            });
+        });
         return totals.map(v => v/data.length);
     }
 }
@@ -90,7 +90,7 @@ class shinyearr{
     }
 
     setUpRecorder(){
-        console.log("Initializing the recorder!")
+        console.log("Initializing the recorder!");
         this.recorder = new get_audio(300);
     }
 
@@ -99,25 +99,27 @@ class shinyearr{
         this.button.click( () => {
 
             //if we arent currently recording, start to.
-            if(this.recording == false){
+            if(this.recording === false){
                 this.recorder.startRecording();
 
                 //start pulse animation
-                this.button.addClass("pulsing")
+                this.button.addClass("pulsing");
+                this.button.text("Stop Recording");
             } else { //otherwise kill the recording
                 var recording = this.recorder.stopRecording();
                 console.log("sending data to shiny!");
-                this.sendToShiny(recording)
+                this.sendToShiny(recording);
 
                 //kill pulse animation
-                this.button.removeClass("pulsing")
+                this.button.removeClass("pulsing");
+                this.button.text("Start Recording");
             }
 
             //update recording variable
             this.recording = !(this.recording);
         });
 
-        console.log("Watching the button", this.button)
+        console.log("Watching the button", this.button);
     }
 
     sendToShiny(data){
@@ -128,7 +130,7 @@ class shinyearr{
 }
 
 $(document).on('shiny:connected', event => {
-    console.log("shiny is connected.")
+    console.log("shiny is connected.");
 
     var buttons = [];
 
@@ -141,4 +143,4 @@ $(document).on('shiny:connected', event => {
     );
 
 
-})
+});
