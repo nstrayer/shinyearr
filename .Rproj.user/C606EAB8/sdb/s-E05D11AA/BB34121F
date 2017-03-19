@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#\n# A small demo app for the shinyearr package\n#\n\nlibrary(shiny)\nlibrary(shinyearr)\nlibrary(tidyverse)\n\n# Define UI for application that draws a histogram\nui <- fluidPage(\n  h1(\"shinyearr demo\"),\n  p(\"Click on the button below to record the a sound. After your recording is done a plot will display your results in terms of the fourier transformed sound signal decomposed into 256 sequential frequencies.\"),\n  shinyearrUI(\"my_recorder\"),\n  plotOutput(\"frequencyPlot\"),\n  p(\"If this is exciting to you make sure to head over to the project's\", a(href = \"github page where you can find all the code\")\n)\n\n# Define server logic required to draw a histogram\nserver <- function(input, output) {\n  recorder <- callModule(shinyearr, \"my_recorder\")\n\n  observeEvent(recorder(), {\n    my_recording <- recorder()\n\n    # Generate a plot of the recording we just made\n    output$frequencyPlot <- renderPlot({\n\n      data_frame(value = my_recording, frequency = 1:256) %>%\n        ggplot(aes(x = frequency, y = value)) +\n        geom_line() +\n        labs(title = \"Frequency bins from recording\")\n    })\n  })\n}\n\n# Run the application\nshinyApp(ui = ui, server = server)\n",
+    "created" : 1489962196080.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1251525952",
+    "id" : "BB34121F",
+    "lastKnownWriteTime" : 1489962693,
+    "last_content_update" : 1489962761882,
+    "path" : "~/Dropbox/spring_17/inference/shinyearr/demo/shinyearr_demo.R",
+    "project_path" : "demo/shinyearr_demo.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,10 @@
+Package: shinyearr
+Type: Package
+Title: A Shiny module that allows you to record sounds and export them to your shiny instance.
+Version: 0.1.0
+Author: Nick Strayer
+Maintainer: Nick Strayer <n.strayer@vanderbilt.edu>
+Description: Package contains just two functions. These two functions correspond with the UI and Server components of a shiny app. All that is output is a single button to the ui and a reactive value containing a 256 element array corresponding to the fourier transformed soundwaves from your recording. 
+License: MIT
+Encoding: UTF-8
+LazyData: true
