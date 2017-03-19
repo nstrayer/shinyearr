@@ -2,6 +2,7 @@
 #'
 #' @param id the id you will use to keep track of this component in your app
 #' @return A blue button that you press to initiate or stop recording of sound.
+#' @export
 #' @examples
 #' shinyearrUI('myrecorder')
 shinyearrUI <- function(id) {

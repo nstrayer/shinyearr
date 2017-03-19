@@ -1,7 +1,7 @@
 #
 # A small demo app for the shinyearr package
 #
-
+# devtools::install_github("nstrayer/shinyearr")
 library(shiny)
 library(shinyearr)
 library(tidyverse)
