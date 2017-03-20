@@ -1,7 +1,9 @@
 # shinyearr
 
 An R package that contains a simple shiny module that allows audio recording and export
-of the fourier transformed data.
+of the fourier transformed data. For an example of the kind of apps you can build with this see this
+[machine learning data collection tool](https://nickstrayer.shinyapps.io/shinyearr_demo/) that allows capture and export of tagged
+speech/sound data for training and testing of speech recognition models. 
 
 ## Installation
 
