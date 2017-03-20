@@ -6,6 +6,7 @@
 library(shiny)
 library(shinyearr)
 library(tidyverse)
+library(forcats)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -57,7 +58,7 @@ server <- function(input, output) {
     rvs$recordings <- rbind(
       data_frame(value = my_recording, frequency = 1:256, num = paste("recording", rvs$counter), label = input$label),
       rvs$recordings
-    )
+    ) %>% mutate(num = fct_inorder(num))
 
     # Generate a plot of the recording we just made
     output$frequencyPlot <- renderPlot({

@@ -55,6 +55,10 @@ class get_audio{
 
         var returned_data = []; //holder for our data return
 
+        //if we stopped before anything was recorded, send nothing.
+        if(this.recording_data.length === 0){
+            return;
+        }
         //only send back the frames in which there was sound.
         this.recording_data.forEach(rec => {
             //add all frequencies to check if anything was recorded

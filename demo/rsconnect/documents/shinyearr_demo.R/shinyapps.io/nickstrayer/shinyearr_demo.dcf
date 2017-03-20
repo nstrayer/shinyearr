@@ -3,8 +3,8 @@ title: shinyearr_demo
 account: nickstrayer
 server: shinyapps.io
 appId: 165114
-bundleId: 753820
+bundleId: 753879
 url: https://nickstrayer.shinyapps.io/shinyearr_demo/
-when: 1489968041.7105
+when: 1489970810.28079
 asMultiple: FALSE
 asStatic: FALSE
