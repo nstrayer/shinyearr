@@ -5,7 +5,6 @@ class get_audio{
         this.int_length = interval_length; //how frequently do we refresh data
         this.full_data = full_data;        //do we send back all frames or just an average?
 
-
         this.recording_data = [];          //array to store the sound data.
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         this.context = new AudioContext();
@@ -14,16 +13,23 @@ class get_audio{
 
 
         //run the get media request for audio only
-        navigator.webkitGetUserMedia({ audio: true }, (stream) => {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then( (stream) => {
 
-            //locate where our audio is coming from
-            this.source = this.context.createMediaStreamSource(stream);
+                //locate where our audio is coming from
+                this.source = this.context.createMediaStreamSource(stream);
 
-            //connect our source to this analyser
-            this.source.connect(this.analyser);
+                // //connect our source to this analyser
+                this.source.connect(this.analyser);
+                //
+                // var gainNode = this.context.createGain();
+                // this.source.connect(gainNode);
+                // gainNode.connect(this.context.destination);
+                // // Reduce the volume.
+                // gainNode.gain.value = 0.0;
 
-            //connect our analyser to context
-            this.analyser.connect(this.context.destination);
+                //connect our analyser to context
+                // this.analyser.connect(this.context.destination);
 
 
         }, function () { });
