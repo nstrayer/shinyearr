@@ -1,3 +1,8 @@
+# Note!
+This package is no longer maintained and will likely not work for you! All functionality of this package has been rolled into the [shinysense package](https://github.com/nstrayer/shinysense).
+
+
+
 # shinyearr
 
 An R package that contains a simple shiny module that allows audio recording and export
